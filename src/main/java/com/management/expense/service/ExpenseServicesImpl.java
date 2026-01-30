@@ -14,45 +14,43 @@ import com.management.expense.repository.ExpenseRepository;
 @Service
 public class ExpenseServicesImpl implements ExpenseServices {
 
-    private final ExpenseRepository expenseRepository;
+	private final ExpenseRepository expenseRepository;
 
-    public ExpenseServicesImpl(ExpenseRepository expenseRepository) {
-        this.expenseRepository = expenseRepository;
-    }
+	public ExpenseServicesImpl(ExpenseRepository expenseRepository) {
+		this.expenseRepository = expenseRepository;
+	}
 
-    @Override
-    public String addExpense(ExpenceCreateDTO dto) {
-        Expense expense = new Expense();
-        expense.setCategory(dto.getCategory());
-        expense.setAmount(dto.getAmount()); // BigDecimal
-        expense.setExpenseDate(dto.getExpenseDate()); // LocalDateTime
-        expense.setDescription(dto.getDescription());
+	@Override
+	public String addExpense(ExpenceCreateDTO dto) {
+		Expense expense = new Expense();
+		expense.setCategory(dto.getCategory());
+		expense.setAmount(dto.getAmount()); 
+		expense.setExpenseDate(dto.getExpenseDate()); 
+		expense.setDescription(dto.getDescription());
 
-        expenseRepository.save(expense);
-        return "Expense added successfully";
-    }
+		expenseRepository.save(expense);
+		return "Expense added successfully";
+	}
 
-    @Override
-    public List<ExpenseViewDTO> getExpenses(LocalDate startDate, LocalDate endDate) {
+	@Override
+	public List<ExpenseViewDTO> getExpenses(LocalDate startDate, LocalDate endDate) {
 
-        LocalDateTime startDateTime = startDate.atStartOfDay();
-        LocalDateTime endDateTime = endDate.atTime(23, 59, 59);
+		if (startDate.isAfter(endDate))
+			throw new IllegalArgumentException("Start date cannot be after end date");
 
-        return expenseRepository
-                .findByExpenseDateBetween(startDateTime, endDateTime)
-                .stream()
-                .map(expense -> new ExpenseViewDTO(
-                        expense.getId(),
-                        expense.getCategory(),
-                        expense.getAmount(),
-                        expense.getExpenseDate(),
-                        expense.getDescription()
-                ))
-                .toList();
-    }
+		LocalDateTime startDateTime = startDate.atStartOfDay();
+		LocalDateTime endDateTime = endDate.atTime(23, 59, 59);
 
-    @Override
-    public void deleteExpense(Long id) {
-        expenseRepository.deleteById(id);
-    }
+		return expenseRepository.findByExpenseDateBetween(startDateTime, endDateTime).stream()
+				.map(expense -> new ExpenseViewDTO(expense.getId(), expense.getCategory(), expense.getAmount(),
+						expense.getExpenseDate(), expense.getDescription()))
+				.toList();
+	}
+
+	@Override
+	public String deleteExpense(Long id) {
+		if(!expenseRepository.existsById(id)) throw new IllegalArgumentException("useer not exist!");
+		expenseRepository.deleteById(id);
+		return "Deleted expence successfully";
+	}
 }

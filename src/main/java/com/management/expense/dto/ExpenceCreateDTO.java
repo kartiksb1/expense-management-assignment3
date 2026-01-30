@@ -4,7 +4,6 @@ import jakarta.validation.constraints.PastOrPresent;
 import jakarta.validation.constraints.Positive;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class ExpenceCreateDTO {
@@ -20,34 +19,34 @@ public class ExpenceCreateDTO {
  private String description;
 
  public String getCategory() {
-     return category;
+	return category;
  }
 
  public void setCategory(String category) {
-     this.category = category;
+	this.category = category;
  }
 
  public BigDecimal getAmount() {
-     return amount;
+	return amount;
  }
 
  public void setAmount(BigDecimal amount) {
-     this.amount = amount;
+	this.amount = amount;
  }
 
  public LocalDateTime getExpenseDate() {
-     return expenseDate;
+	return expenseDate;
  }
 
  public void setExpenseDate(LocalDateTime expenseDate) {
-     this.expenseDate = expenseDate;
+	this.expenseDate = expenseDate;
  }
 
  public String getDescription() {
-     return description;
+	return description;
  }
 
  public void setDescription(String description) {
-     this.description = description;
+	this.description = description;
  }
 }

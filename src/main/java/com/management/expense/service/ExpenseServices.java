@@ -14,6 +14,6 @@ public interface ExpenseServices {
 
 	List<ExpenseViewDTO> getExpenses(LocalDate startDate, LocalDate endDate);
 
-	void deleteExpense(Long id);
+	String deleteExpense(Long id);
 
 }

@@ -19,22 +19,42 @@ public class ExpenseViewDTO {
  }
 
  public Long getId() {
-     return id;
+	return id;
+ }
+
+ public void setId(Long id) {
+	this.id = id;
  }
 
  public String getCategory() {
-     return category;
+	return category;
+ }
+
+ public void setCategory(String category) {
+	this.category = category;
  }
 
  public double getAmount() {
-     return amount;
+	return amount;
+ }
+
+ public void setAmount(double amount) {
+	this.amount = amount;
  }
 
  public LocalDate getExpenseDate() {
-     return expenseDate;
+	return expenseDate;
+ }
+
+ public void setExpenseDate(LocalDate expenseDate) {
+	this.expenseDate = expenseDate;
  }
 
  public String getDescription() {
-     return description;
+	return description;
+ }
+
+ public void setDescription(String description) {
+	this.description = description;
  }
 }
