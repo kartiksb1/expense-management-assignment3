@@ -1,5 +1,4 @@
 package com.management.expense.service;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -9,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.management.expense.dto.ExpenceCreateDTO;
 import com.management.expense.dto.ExpenseViewDTO;
 import com.management.expense.entity.Expense;
+import com.management.expense.exception.ExpenseNotFoundException;
 import com.management.expense.repository.ExpenseRepository;
 
 @Service
@@ -49,8 +49,9 @@ public class ExpenseServicesImpl implements ExpenseServices {
 
 	@Override
 	public String deleteExpense(Long id) {
-		if(!expenseRepository.existsById(id)) throw new IllegalArgumentException("useer not exist!");
-		expenseRepository.deleteById(id);
+		Expense expense = expenseRepository.findById(id)
+		        .orElseThrow(() -> new ExpenseNotFoundException("Expense not found with id: " + id));
+		expenseRepository.delete(expense);
 		return "Deleted expence successfully";
 	}
 }

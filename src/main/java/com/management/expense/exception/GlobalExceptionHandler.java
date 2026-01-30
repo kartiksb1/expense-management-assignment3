@@ -25,4 +25,10 @@ public class GlobalExceptionHandler {
 		return ResponseEntity.badRequest().body(ex.getBindingResult().getFieldErrors().stream()
 				.collect(Collectors.toMap(FieldError::getField, FieldError::getDefaultMessage)));
 	}
+	
+	@ExceptionHandler(ExpenseNotFoundException.class)
+	public ResponseEntity<String> handleExpenseNotFound(ExpenseNotFoundException ex) {
+	    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
+	}
+
 }

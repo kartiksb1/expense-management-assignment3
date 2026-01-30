@@ -1,5 +1,6 @@
 package com.management.expense.dto;
 
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.PastOrPresent;
 import jakarta.validation.constraints.Positive;
 
@@ -8,45 +9,46 @@ import java.time.LocalDateTime;
 
 public class ExpenceCreateDTO {
 
- private String category;
+	@NotBlank(message = "Category cannot be empty")
+	private String category;
 
- @Positive(message = "Amount must be greater than 0")
- private BigDecimal amount;
+	@Positive(message = "Amount must be greater than 0")
+	private BigDecimal amount;
 
- @PastOrPresent(message = "Expense date cannot be in the future")
- private LocalDateTime expenseDate;
+	@PastOrPresent(message = "Expense date cannot be in the future")
+	private LocalDateTime expenseDate;
 
- private String description;
+	private String description;
 
- public String getCategory() {
-	return category;
- }
+	public String getCategory() {
+		return category;
+	}
 
- public void setCategory(String category) {
-	this.category = category;
- }
+	public void setCategory(String category) {
+		this.category = category;
+	}
 
- public BigDecimal getAmount() {
-	return amount;
- }
+	public BigDecimal getAmount() {
+		return amount;
+	}
 
- public void setAmount(BigDecimal amount) {
-	this.amount = amount;
- }
+	public void setAmount(BigDecimal amount) {
+		this.amount = amount;
+	}
 
- public LocalDateTime getExpenseDate() {
-	return expenseDate;
- }
+	public LocalDateTime getExpenseDate() {
+		return expenseDate;
+	}
 
- public void setExpenseDate(LocalDateTime expenseDate) {
-	this.expenseDate = expenseDate;
- }
+	public void setExpenseDate(LocalDateTime expenseDate) {
+		this.expenseDate = expenseDate;
+	}
 
- public String getDescription() {
-	return description;
- }
+	public String getDescription() {
+		return description;
+	}
 
- public void setDescription(String description) {
-	this.description = description;
- }
+	public void setDescription(String description) {
+		this.description = description;
+	}
 }
