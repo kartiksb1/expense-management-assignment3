@@ -4,6 +4,12 @@ A simple **Expense Management REST API** built using **Spring Boot 3.x** and **J
 This application allows users to add expenses, list expenses within a date range, and delete expenses while enforcing validation and clean REST design principles.
 
 ---
+## REST Design Decisions
+- Used plural nouns (`/expenses`) as per REST conventions
+- Used DTOs to avoid exposing entities directly
+- Used query parameters for filtering instead of request body
+- Controllers contain no business logic; services handle processing
+
 
 ## 📌 Features
 
@@ -27,6 +33,3 @@ This application allows users to add expenses, list expenses within a date range
 - **Maven**
 
 ---
-
-## 📂 Project Structure
-
